@@ -5,9 +5,7 @@ describe 'metricbeat::module' do
   let(:params) do
     {
       config: [
-        'module': 'system',
-	'syslog': {'enabled': true},
-	'auth': {'enabled': true}
+        'module': 'apache'
       ]
     }
   end
