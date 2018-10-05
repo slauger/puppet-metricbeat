@@ -1,0 +1,15 @@
+---
+metricbeat::package_name: 'metricbeat'
+metricbeat::package_ensure: 'present'
+metricbeat::package_provider: ~
+metricbeat::package_source: ~
+metricbeat::service_name: 'metricbeat'
+metricbeat::service_ensure: 'running'
+metricbeat::service_enable: true
+metricbeat::environment_file: '/etc/sysconfig/metricbeat'
+metricbeat::modules: {}
+metricbeat::config:
+  name: '%{facts.fqdn}'
+  logging.level: 'error'
+  logging.selectors: ["*"]
+metricbeat::env: {}

@@ -1,0 +1,9 @@
+# This file is managed by Puppet; changes may be overwritten
+
+metricbeat.config.modules:
+  enabled: true
+  path: ${path.config}/modules.d/*.yml
+  reload.enabled: false
+  reload.period: 10s
+
+<%= $config %>
