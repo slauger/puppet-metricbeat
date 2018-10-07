@@ -42,46 +42,24 @@ All parameters for the metricbeat module are contained within the main `metricbe
 include metricbeat
 ```
 
-### Define a metricbeat input
-
-Each hash entry represents a own configuration file inside of `/etc/metricbeat/inputs.d`.
-
-```yaml
-metricbeat::inputs:
-  syslog:
-    - type: log
-      enabled: true
-      paths:
-        - /var/log/messages
-        - /var/log/syslog
-```
-
-Optional additional fields can be added.
-
-```yaml
-metricbeat::inputs:
-  syslog:
-    - type: log
-      enabled: true
-      paths:
-        - /var/log/messages
-        - /var/log/syslog
-      fields:
-        type: syslog
-```
-
 ### Configure a metricbeat module
 
 Each hash entry represents a own configuration file inside of `/etc/metricbeat/modules.d`.
 
 ```yaml
 metricbeat::modules:
-  'system':
-    - module: system
-      syslog:
-        enabled: true
-      auth:
-        enabled: true
+  'docker':
+    - module: docker
+      metricsets:
+        - container
+        - cpu
+        - diskio
+        - healthcheck
+        - info
+        - memory
+        - network
+      period: 10s
+      hosts: ["unix:///var/run/docker.sock"]
 ```
 
 ### Configure Logstash output
@@ -98,36 +76,6 @@ metricbeat::config:
 ### Configure Apache Kafka output
 
 ```yaml
-metricbeat::config:
-  output:
-    kafka:
-      hosts:
-        - 'kafka1.example.com:9092'
-        - 'kafka2.example.com:9092'
-      topic: 'logs'
-```
-
-### Configure Apache Kafka with output to different topics
-
-```yaml
-metricbeat::inputs:
-  syslog:
-    - type: log
-      enabled: true
-      paths:
-        - /var/log/messages
-        - /var/log/syslog
-      fields:
-        kafka_topic: syslog
-  apache:
-    - type: log
-      enabled: true
-      paths:
-        - /var/log/httpd/access_log
-        - /var/log/apache2/access_log
-      fields:
-        kafka_topic: apache
-
 metricbeat::config:
   output:
     kafka:
@@ -178,12 +126,10 @@ metricbeat::config:
       ssl.renegotiation: never
 
 metricbeat::modules:
-  system:
-    - module: system
-      syslog:
-        enabled: true
-      auth:
-        enabled: true
+  'docker':
+    - module: docker
+      period: 10s
+      hosts: ["unix:///var/run/docker.sock"]metricbeat::modules:
 ```
 
 ## Reference
