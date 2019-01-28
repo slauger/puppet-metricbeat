@@ -1,5 +1,5 @@
 {
-  "name": "puppet-metricbeat",
+  "name": "slauger-metricbeat",
   "version": "1.0.0",
   "author": "slauger",
   "summary": "This module installs, configures and manages the Metricbeat service.",
