@@ -1,7 +1,21 @@
 ---
+Rakefile:
+  requires:
+    - 'puppet_blacksmith/rake_tasks'
+    - 'voxpupuli/release/rake_tasks'
+    - 'puppet-strings/tasks'
+  changelog_project: 'puppet-metricbeat'
+
 Gemfile:
   optional:
-    ':development':
+    ':release':
       - gem: 'github_changelog_generator'
-        git: 'https://github.com/skywinder/github-changelog-generator'
-        ref: '20ee04ba1234e9e83eb2ffb5056e23d641c7a018'
+        git: 'https://github.com/skywinder/github-changelog-generator.git'
+        condition: "RUBY_VERSION >= '2.2.2'"
+      - gem: 'puppet-blacksmith'
+      - gem: 'voxpupuli-release'
+        git: 'https://github.com/voxpupuli/voxpupuli-release-gem.git'
+      - gem: 'puppet-strings'
+
+appveyor.yml:
+  delete: true

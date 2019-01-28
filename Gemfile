@@ -26,7 +26,12 @@ group :development do
   gem "puppet-module-posix-dev-r#{minor_version}",     require: false, platforms: [:ruby]
   gem "puppet-module-win-default-r#{minor_version}",   require: false, platforms: [:mswin, :mingw, :x64_mingw]
   gem "puppet-module-win-dev-r#{minor_version}",       require: false, platforms: [:mswin, :mingw, :x64_mingw]
-  gem "github_changelog_generator",                    require: false, git: 'https://github.com/skywinder/github-changelog-generator', ref: '20ee04ba1234e9e83eb2ffb5056e23d641c7a018'
+end
+group :release do
+  gem "github_changelog_generator", require: false, git: 'https://github.com/skywinder/github-changelog-generator.git' if RUBY_VERSION >= '2.2.2'
+  gem "puppet-blacksmith",          require: false
+  gem "voxpupuli-release",          require: false, git: 'https://github.com/voxpupuli/voxpupuli-release-gem.git'
+  gem "puppet-strings",             require: false
 end
 
 puppet_version = ENV['PUPPET_GEM_VERSION']
