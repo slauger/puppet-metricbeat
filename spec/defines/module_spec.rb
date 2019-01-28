@@ -5,8 +5,8 @@ describe 'metricbeat::module' do
   let(:params) do
     {
       config: [
-        'module': 'apache'
-      ]
+        'module' => 'apache',
+      ],
     }
   end
 
