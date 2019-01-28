@@ -1,7 +1,7 @@
 {
-  "name": "slauger-metricbeat",
+  "name": "puppet-metricbeat",
   "version": "1.0.0",
-  "author": "Simon Lauger",
+  "author": "slauger",
   "summary": "This module installs, configures and manages the Metricbeat service.",
   "license": "MIT",
   "source": "git://github.com/slauger/puppet-metricbeat.git",
