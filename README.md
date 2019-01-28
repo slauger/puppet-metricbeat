@@ -13,7 +13,7 @@
 
 ## Module description
 
-The metricbeat module installs, configures and manages the Elastic metricbeat service for shipping logs to Logstash, Kafka or Elasticsearch.
+The metricbeat module installs, configures and manages the Elastic metricbeat service for shipping metrics to Logstash, Kafka or Elasticsearch.
 
 ## Setup
 
@@ -99,7 +99,7 @@ metricbeat::config:
 
 ### Full example configuration
 
-A complete example configuration using the Logstash output with authentication via the Puppet SSL certificates TLS hardening.
+A complete example configuration using the Logstash output with authentication via the Puppet SSL certificates.
 
 ```yaml
 metricbeat::env:
@@ -126,10 +126,23 @@ metricbeat::config:
       ssl.renegotiation: never
 
 metricbeat::modules:
-  'docker':
-    - module: docker
+  'system':
+    - module: system
+      metricsets:
+        - cpu
+        - load
+        - memory
+        - network
+        - process
+        - process_summary
+        - uptime
+        - core
+        - diskio
+        - filesystem
+        - fsstat
+      enabled: true
       period: 10s
-      hosts: ["unix:///var/run/docker.sock"]metricbeat::modules:
+      processes: ['.*']
 ```
 
 ## Reference
